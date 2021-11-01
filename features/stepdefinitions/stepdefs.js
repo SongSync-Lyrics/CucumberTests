@@ -89,3 +89,34 @@ Then("ensure Im a {word}", function (expectedAnswer){
 Then("I {string} the session", function (expectedAnswer){
   assert.strictEqual(this.roomLeader, expectedAnswer);
 });
+
+//Feature 4 tests
+Given('I am a follower', function () {
+  this.userType = "follower";
+});
+
+When("I enter a {word} room code", function (expectedAnswer){
+  this.code = expectedAnswer;
+  this.actualAnswer = "";
+  this.actualAnswer2 = "";
+  
+  if(this.code === "valid"){
+    this.actualAnswer = "";
+    this.actualAnswer2 = "can";
+  }else{
+    this.actualAnswer = "can't ";
+    this.actualAnswer2 = "cannot";
+  }
+});
+
+Then("press join", function (){
+  return "";
+});
+
+Then("I {}join a leader's session", function (expectedAnswer){
+  assert.strictEqual(this.actualAnswer, expectedAnswer);
+});
+
+Then("I {word} view lyrics", function (expectedAnswer){
+  assert.strictEqual(this.actualAnswer2, expectedAnswer);
+});
