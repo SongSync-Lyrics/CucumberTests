@@ -110,7 +110,7 @@ When("I enter a {word} room code", function (expectedAnswer){
 });
 
 Then("press join", function (){
-  return "";
+  return "joined";
 });
 
 Then("I {}join a leader's session", function (expectedAnswer){
@@ -119,4 +119,54 @@ Then("I {}join a leader's session", function (expectedAnswer){
 
 Then("I {word} view lyrics", function (expectedAnswer){
   assert.strictEqual(this.actualAnswer2, expectedAnswer);
+});
+
+//Feature 5
+Given('Im a leader', function () {
+  this.userType = "leader";
+});
+
+Then("I have {word} ChordPro files", function (expectedAnswer){
+  this.fileFunctional = expectedAnswer;
+  this.errorCheck = "";
+
+  if(this.fileFunctional == "working"){
+    this.errorCheck = "lyrics";
+  }else{
+    this.errorCheck = "an error";
+  }
+});
+
+When("I upload ChordPro files", function (){
+  return "uploaded";
+});
+
+Then("ensure the website displays {string}", function (expectedAnswer){
+  assert.strictEqual(this.errorCheck, expectedAnswer);
+});
+
+Then("the lyrics are properly formatted", function (){
+  return "format good";
+});
+
+Then("the lyrics are shared", function (){
+  return "lyrics shared";
+});
+
+//Feature 6 tests
+Given('I am a user', function () {
+  this.userType = "user";
+});
+
+When("I {string} a session", function (expectedAnswer){
+  this.errorCheck = "";
+  if(expectedAnswer == "join"){
+    this.errorCheck = "displayed";
+  }else{
+    this.errorCheck = "not displayed";
+  }
+});
+
+Then("the lyrics are {string}", function (expectedAnswer){
+  assert.strictEqual(this.errorCheck, expectedAnswer);
 });
